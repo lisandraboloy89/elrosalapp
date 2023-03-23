@@ -21,9 +21,10 @@
 
         <ImageView
             android:id="@+id/btn_menu_principal"
-            android:layout_width="50dp"
-            android:layout_height="30dp"
-            app:srcCompat="@drawable/ic_menu" />
+            android:layout_width="35dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_menu"
+            android:scaleType="center" />
 
         <TextView
             android:id="@+id/textView"
@@ -43,26 +44,36 @@
             app:srcCompat="@drawable/ic_shopping" />
     </LinearLayout>
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmenContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:visibility="visible" />
+
     <LinearLayout
         android:id="@+id/barra_menuIzquierdo"
         android:layout_width="100dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
         android:layout_marginTop="80dp"
-        android:gravity="center_horizontal"
         android:background="@color/oscuro"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/btn_incio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
             android:background="@drawable/fondo_barra_arriba"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <ImageView
                 android:id="@+id/img_incio"
@@ -74,19 +85,19 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:gravity="center"
-                android:textSize="16dp"
-                android:text="Inicio" />
+                android:text="Inicio"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/btn_menucomida"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
             android:background="@drawable/fondo_barra_arriba"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <ImageView
                 android:id="@+id/img_mu"
@@ -98,19 +109,19 @@
                 android:id="@+id/textViewg2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:gravity="center"
-                android:textSize="16dp"
-                android:text="Menú" />
+                android:text="Menú"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/btn_bebida"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
             android:background="@drawable/fondo_barra_arriba"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <ImageView
                 android:id="@+id/img_muad"
@@ -122,19 +133,19 @@
                 android:id="@+id/textVie3waag2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:gravity="center"
-                android:textSize="16dp"
-                android:text="Bebidas" />
+                android:text="Bebidas"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/btn_pago"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
             android:background="@drawable/fondo_barra_arriba"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <ImageView
                 android:id="@+id/img_mud"
@@ -146,19 +157,19 @@
                 android:id="@+id/textViewaag2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:gravity="center"
-                android:textSize="16dp"
-                android:text="Pago" />
+                android:text="Pago"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/btn_Ajustes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
             android:background="@drawable/fondo_barra_arriba"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <ImageView
                 android:id="@+id/img_mud222"
@@ -170,26 +181,12 @@
                 android:id="@+id/textViewaagaaa2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:gravity="center"
-                android:textSize="16dp"
-                android:text="Ajustes" />
+                android:text="Ajustes"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
         </LinearLayout>
 
     </LinearLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

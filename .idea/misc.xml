@@ -4,8 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Trabajo/proyectos/El Rosal/app/src/main/res/drawable/fondo_barra_arriba.xml" value="0.176" />
+        <entry key="..\:/Trabajo/proyectos/El Rosal/app/src/main/res/drawable/imgen_bordes_redondos.xml" value="0.2395" />
+        <entry key="..\:/Trabajo/proyectos/El Rosal/app/src/main/res/drawable/shape.xml" value="0.2395" />
         <entry key="..\:/Trabajo/proyectos/El Rosal/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Trabajo/proyectos/El Rosal/app/src/main/res/layout/activity_splash_screen.xml" value="0.22826086956521738" />
+        <entry key="..\:/Trabajo/proyectos/El Rosal/app/src/main/res/layout/fragment_inicio.xml" value="0.22826086956521738" />
+        <entry key="..\:/Trabajo/proyectos/El Rosal/app/src/main/res/layout/modelo_menu.xml" value="0.6" />
       </map>
     </option>
   </component>
