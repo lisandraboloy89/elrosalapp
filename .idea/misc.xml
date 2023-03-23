@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Trabajo/proyectos/El Rosal/app/src/main/res/layout/activity_main.xml" value="0.22780797101449277" />
+        <entry key="..\:/Trabajo/proyectos/El Rosal/app/src/main/res/drawable/fondo_barra_arriba.xml" value="0.176" />
+        <entry key="..\:/Trabajo/proyectos/El Rosal/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Trabajo/proyectos/El Rosal/app/src/main/res/layout/activity_splash_screen.xml" value="0.22826086956521738" />
       </map>
     </option>
   </component>

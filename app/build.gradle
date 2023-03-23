@@ -31,6 +31,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
@@ -58,7 +64,7 @@ dependencies {
     ///------consola-------
     implementation 'com.orhanobut:logger:2.2.0'
     //-------graficar-------------------------------
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    //implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     //--------Reporte de errores--------------------------
     implementation 'cat.ereza:customactivityoncrash:2.3.0'
 }
