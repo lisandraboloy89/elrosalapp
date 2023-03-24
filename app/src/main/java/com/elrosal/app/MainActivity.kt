@@ -1,23 +1,43 @@
 package com.elrosal.app
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.elrosal.app.api.ApiService
+import com.elrosal.app.api.dato
 import com.elrosal.app.databinding.ActivityMainBinding
+import com.elrosal.app.fragment.FragmentAjustes
 import com.elrosal.app.fragment.InicioFragment
 import com.elrosal.app.utiles.MainFragmentActionListener
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.Logger
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import org.json.JSONException
+import org.json.JSONObject
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity(), MainFragmentActionListener {
 
     private lateinit var binding:ActivityMainBinding
     lateinit var slideInLeft:Animation
     lateinit var hideInLeft:Animation
+    private var lista_resp: dato? =null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +47,7 @@ class MainActivity : AppCompatActivity(), MainFragmentActionListener {
         slideInLeft = AnimationUtils.loadAnimation(this, R.anim.slide_in_left)
         hideInLeft = AnimationUtils.loadAnimation(this, R.anim.hide_in_left)
         //-----------------------Ajustes iniciales-----------------------------
+        //comprobar_conexion()   //------Obtener Datos de la API
         pasarFragment(InicioFragment())                     //---------------Iniciar fragmento--------
         binding.barraMenuIzquierdo.visibility= View.GONE    //---------------Oculta barra al iniciar activity
         //-----------------------Pinta barra superior de status de android-------------------------------------
@@ -40,6 +61,24 @@ class MainActivity : AppCompatActivity(), MainFragmentActionListener {
             }else {
                mostrar_barraMenuIzquirda()
             }
+        }
+        //--------------------Acciones de los botones de la barra de menu izquierdo------
+        binding.btnAjustes.setOnClickListener {
+            pasarFragment(FragmentAjustes())             //---------------Fragmento ajustes--------
+            ocultar_barraMenuIzquirda()
+        }
+        binding.btnPago.setOnClickListener {
+            ocultar_barraMenuIzquirda()
+        }
+        binding.btnBebida.setOnClickListener {
+            ocultar_barraMenuIzquirda()
+        }
+        binding.btnMenucomida.setOnClickListener {
+            ocultar_barraMenuIzquirda()
+        }
+        binding.imgIncio.setOnClickListener {
+            pasarFragment(InicioFragment())             //---------------Fragmento inicio--------
+            ocultar_barraMenuIzquirda()
         }
 
     }
@@ -78,7 +117,9 @@ class MainActivity : AppCompatActivity(), MainFragmentActionListener {
     fragmentTransaction.commit()
     }
 
-    override fun cambiarActivity() {   //-----Metodo para pasar a un activity
-        startActivity(Intent(this, MainActivity::class.java))
+    override fun rellenarRecycleView(): dato {
+        TODO("Not yet implemented")
     }
+
+
 }

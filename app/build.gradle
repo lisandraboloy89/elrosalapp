@@ -67,4 +67,7 @@ dependencies {
     //implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     //--------Reporte de errores--------------------------
     implementation 'cat.ereza:customactivityoncrash:2.3.0'
+    ///----imgen http
+    implementation 'com.github.bumptech.glide:glide:4.13.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
 }
