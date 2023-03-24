@@ -40,9 +40,6 @@ class InicioFragment : Fragment() {
 
     private lateinit var binding:FragmentInicioBinding
     private var listener:MainFragmentActionListener?=null
-    private lateinit var lista_resp: dato
-    //lateinit var adapter: menuAdapter
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -62,7 +59,6 @@ class InicioFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         //---------------------------acciones--------------------------
-        //comprobar_conexion()
         //animacionFoto()
     }
 
@@ -88,82 +84,6 @@ class InicioFragment : Fragment() {
         listener=null
     }
 //-----------------------------------------------------------------------------------------------------
-//----------------------------Conexion con API--------------------------------------------
-fun comprobar_conexion(){
-    val connectivityManager =
-        context?.getSystemService(Activity.CONNECTIVITY_SERVICE) as ConnectivityManager
-    val networkInfo = connectivityManager.activeNetworkInfo
 
-    //--------verifica la conexion de internet para continuar-----------------------------
-    if (networkInfo != null && networkInfo.isConnected) {
-        obtenerListaMenu()
-    } else {
-        //toastExt("Active el Internet para seguir")
-        //mensajeDialog.startMenssageDialogo("Active el Internet para seguir")
-    }
-}
-    ////------------------API-RESET-Retrofit------------------------------------------/////
-    private fun getRetrofit(): Retrofit {
-        val logging = HttpLoggingInterceptor()
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
 
-        val client: OkHttpClient = OkHttpClient.Builder()
-            .connectTimeout(1, TimeUnit.MINUTES)
-            .writeTimeout(1, TimeUnit.MINUTES) // write timeout
-            .readTimeout(1, TimeUnit.MINUTES) // read timeout
-            .addInterceptor(logging)
-            .build()
-        return Retrofit.Builder()
-            .baseUrl("https://parseapi.back4app.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(client)
-            .build()
-    }
-    //-------------------------------Hacer pedido a API en Hilo secundario------------------------------------
-    private fun obtenerListaMenu() {
-        try {
-            CoroutineScope(Dispatchers.IO).launch {
-                val call: Response<dato> = getRetrofit().create(ApiService::class.java)
-                    .getObtenerMenu()
-                val listaMenu: dato? = call.body()
-                if (call.isSuccessful) {
-                    Looper.prepare()
-                    listarMenu(listaMenu!!)  //-------------Pasar Respuesta obtenido a metodo
-                    Looper.loop()
-                } else { //--------------------Respuesta Error------------------------------
-                    if (call.code() == 400 || call.code() == 404 ) {
-                        var jsonObject: JSONObject? = null
-                        try {
-                            jsonObject = JSONObject(call.errorBody()?.string())
-                            val Codigo = jsonObject!!.getString("code")
-                            val Errors = jsonObject!!.getString("error")
-                            Looper.prepare()
-                            ToasDeError(Codigo,Errors)
-                            Looper.loop()
-                        } catch (e: JSONException) {
-                            e.printStackTrace()
-                        }
-                    }
-                }
-
-            }
-        } catch (e: Exception) {
-            //toastExt("Error de conexión con el servidor")
-        }
-    }
-    //----------------Procesar los resusltados de la API-----------------------
-    private fun listarMenu(listaMenu: dato) {
-        Logger.addLogAdapter(AndroidLogAdapter())
-        var userID: String = listaMenu!!.results[0].objectId
-        Logger.d(userID)
-        Logger.d(listaMenu?.results)
-        lista_resp=listaMenu
-
-    }
-
-    //----------Mostrar errores en las respuestas de API------------------------
-    fun ToasDeError(code: String, error: String) {
-        Logger.addLogAdapter(AndroidLogAdapter())
-        Logger.d("$code $error")
-    }
 }
