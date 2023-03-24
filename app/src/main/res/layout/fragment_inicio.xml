@@ -20,7 +20,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/imagen_principal"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:background="@drawable/photo_25" />
@@ -52,6 +52,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:textColor="@color/rosa"
+                        android:textSize="20dp"
                         android:text="8:00 AM" />
                     <TextView
                         android:id="@+id/textssView6"
@@ -59,6 +60,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:layout_marginHorizontal="10dp"
+                        android:textSize="20dp"
                         android:textColor="@color/rosa"
                         android:text="a" />
 
@@ -68,6 +70,7 @@
                         android:gravity="center"
                         android:layout_height="wrap_content"
                         android:textColor="@color/rosa"
+                        android:textSize="20dp"
                         android:text="15:00 PM" />
                 </LinearLayout>
             </LinearLayout>

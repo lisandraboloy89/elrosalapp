@@ -2,6 +2,7 @@ package com.elrosal.app.fragment
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.drawable.TransitionDrawable
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
@@ -13,6 +14,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.elrosal.app.R
 import com.elrosal.app.adapter.menuAdapter
 import com.elrosal.app.api.ApiService
 import com.elrosal.app.api.dato
@@ -61,14 +63,26 @@ class InicioFragment : Fragment() {
 
         //---------------------------acciones--------------------------
         comprobar_conexion()
-        //rellenarRecycleView()
-       /* binding.btnPacientes.setOnClickListener {
-            listener?.cambiarActivityPaciente()
-        }
-        binding.btnBuscar.setOnClickListener {
-            listener?.cambiarActivityDP()
-        }*/
+        //animacionFoto()
     }
+
+    private fun animacionFoto() {
+        val images = listOf(R.drawable.photo_elrosal, R.drawable.photo_25)
+        var currentIndex = 0
+        val handler = Handler()
+        val runnable = object : Runnable {
+            override fun run() {
+                val nextIndex = (currentIndex + 1) % images.size
+                val nextImage = resources.getDrawable(images[nextIndex], null)
+                binding.imagenPrincipal.background = nextImage
+                currentIndex = nextIndex
+                handler.postDelayed(this, 200)
+            }
+        }
+
+        handler.postDelayed(runnable, 200)
+    }
+//-------------------------Metodo para rellenar el recycleview con los datos del menu---------------
     private fun rellenarRecycleView(results: List<respuestaMenu>) {
         activity?.runOnUiThread(java.lang.Runnable {
             Handler().postDelayed({

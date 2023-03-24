@@ -18,7 +18,7 @@
         android:layout_weight="1"
         android:layout_marginBottom="5dp"
         android:background="@drawable/imgen_bordes_redondos"
-        android:src="@drawable/pizza1" />
+        android:src="@drawable/pizza" />
 
     <TextView
         android:id="@+id/text_nombre_menu"

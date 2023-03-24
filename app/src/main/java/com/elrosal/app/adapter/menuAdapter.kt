@@ -1,6 +1,8 @@
 package com.elrosal.app.adapter
 
 import android.content.Context
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,6 +47,16 @@ class menuAdapter(val respuesta:List<respuestaMenu>): RecyclerView.Adapter<menuA
         val resp: respuestaMenu = respuesta[position]
         holder.nombreMenu.setText(resp.nombre.toString())
         holder.precioMenu.setText(resp.precio)
-        //Glide.with(holder.imagenMenu.context).load(resp.foto.url).into(holder.imagenMenu)
+        val bitmapString=resp.muestraFoto
+        if(bitmapString.equals("0"))
+        {
+        }else
+        {
+        val decodedByteArray = Base64.decode(bitmapString, Base64.DEFAULT)
+        val decodedBitmap = BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.size)
+        holder.imagenMenu.setImageBitmap(decodedBitmap)
+        }
+
+
     }
 }

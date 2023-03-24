@@ -17,6 +17,10 @@ data class respuestaMenu(
     var createdAt: String,
     @SerializedName("updatedAt")
     var updatedAt: String,
-    @SerializedName("foto")
-    var foto: Foto
+    @SerializedName("muestra")
+    var muestraFoto: String,
+    @SerializedName("tipo")
+    var tipo: String,
+    @SerializedName("estado")
+    var estado: String
 )
