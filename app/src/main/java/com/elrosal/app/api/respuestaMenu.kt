@@ -22,5 +22,5 @@ data class respuestaMenu(
     @SerializedName("tipo")
     var tipo: String,
     @SerializedName("estado")
-    var estado: String
+    var estado: Boolean
 )

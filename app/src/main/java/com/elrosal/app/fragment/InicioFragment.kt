@@ -62,7 +62,7 @@ class InicioFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         //---------------------------acciones--------------------------
-        comprobar_conexion()
+        //comprobar_conexion()
         //animacionFoto()
     }
 
@@ -82,34 +82,6 @@ class InicioFragment : Fragment() {
 
         handler.postDelayed(runnable, 200)
     }
-//-------------------------Metodo para rellenar el recycleview con los datos del menu---------------
-    private fun rellenarRecycleView(results: List<respuestaMenu>) {
-        activity?.runOnUiThread(java.lang.Runnable {
-            Handler().postDelayed({
-                //binding.animationEspera.visibility=View.GONE
-                try {
-                    //binding.textoError.visibility=View.GONE
-                    val recycle_area: RecyclerView = binding.recycleMenu
-                     var adapter = menuAdapter(results)
-                    recycle_area.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL, false)
-                    recycle_area.adapter = adapter
-                    adapter!!.setOnItemClickListener(object: menuAdapter.onItemClickListener{
-                        override fun onItemClick(position: Int) {
-                            //var nombre=lista_resp[position].nombre.toString()
-                            //var rc=lista_resp[position].valor_rc.toString()
-                        }
-                    })
-                }catch (Ex:Exception){
-                    // binding.textoError.visibility=View.VISIBLE
-                }
-
-            }, 1000)
-        })
-        Logger.addLogAdapter(AndroidLogAdapter())
-        Logger.d(lista_resp);
-        }
-
-
 
     override fun onDetach() {
         super.onDetach()
@@ -186,7 +158,7 @@ fun comprobar_conexion(){
         Logger.d(userID)
         Logger.d(listaMenu?.results)
         lista_resp=listaMenu
-        rellenarRecycleView(listaMenu?.results)
+
     }
 
     //----------Mostrar errores en las respuestas de API------------------------

@@ -42,21 +42,21 @@ class menuAdapter(val respuesta:List<respuestaMenu>): RecyclerView.Adapter<menuA
             }
         }
     }
-    //----------------------------------Accionrs del recycleview
+    //----------------------------------Acciones del recycleview---------------------------
     override fun onBindViewHolder(holder: menuAdapter.ViewHolder, position: Int) {
+
         val resp: respuestaMenu = respuesta[position]
         holder.nombreMenu.setText(resp.nombre.toString())
         holder.precioMenu.setText(resp.precio)
-        val bitmapString=resp.muestraFoto
-        if(bitmapString.equals("0"))
-        {
-        }else
-        {
-        val decodedByteArray = Base64.decode(bitmapString, Base64.DEFAULT)
-        val decodedBitmap = BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.size)
-        holder.imagenMenu.setImageBitmap(decodedBitmap)
-        }
+        var bitmapString=resp.muestraFoto
+            if (bitmapString.equals("0")) {
+            } else {
+                val decodedByteArray = Base64.decode(bitmapString, Base64.DEFAULT)
+                val decodedBitmap =
+                    BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.size)
+                holder.imagenMenu.setImageBitmap(decodedBitmap)
 
+            }
 
     }
 }

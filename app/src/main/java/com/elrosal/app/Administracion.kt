@@ -108,8 +108,8 @@ class Administracion : AppCompatActivity() {
                             binding.textGramajeAd.text.toString(),
                             binding.textDescripAd.text.toString(),
                             fotoString,
-                            "",
-                            "1"
+                            "ensalada",
+                            true
                         )
 
                     )

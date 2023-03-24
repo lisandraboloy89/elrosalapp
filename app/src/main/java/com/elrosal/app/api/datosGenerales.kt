@@ -24,6 +24,8 @@ data class dataGenerales(
     val numero_pago: String,
     @SerializedName("info")
     val info: String,
+    @SerializedName("fijo")
+    val fijo: String,
     @SerializedName("createdAt")
     val createdAt: String,
     @SerializedName("updatedAt")
@@ -43,5 +45,7 @@ data class envioDatosGenerales(
     @SerializedName("numero_pago")
     val numero_pago: String,
     @SerializedName("info")
-    val info: String
+    val info: String,
+    @SerializedName("fijo")
+    val fijo: String
 )

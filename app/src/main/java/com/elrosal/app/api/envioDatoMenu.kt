@@ -19,5 +19,5 @@ data class envioDatoMenu(
     @SerializedName("tipo")
     val tipo: String,
     @SerializedName("estado")
-    val estado: String
+    val estado: Boolean
 )

@@ -16,6 +16,7 @@ class Splash_screen : AppCompatActivity() {
         setContentView(R.layout.activity_splash_screen)
         binding= ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.animationSplash.playAnimation()
         //------------------------------------------------------------
         Handler().postDelayed({
                 startActivity(Intent(this,MainActivity::class.java))

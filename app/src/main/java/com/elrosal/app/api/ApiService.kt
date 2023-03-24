@@ -11,7 +11,7 @@ interface ApiService {
         "X-Parse-REST-API-Key: sMP0zd8mFhKeRtNyMxh8JFg8ey7Z48zIwlFV7DCG",
         "X-Parse-Revocable-Session: 1"
     )
-    @GET("classes/menu")
+    @GET("classes/menu?where=%7B%20%22estado%22%3A%20true%20%7D")
     suspend fun getObtenerMenu (): Response<dato>
     //----->>>>>>GET-------Eliminar datos del menu-------------------------<<<<<<<<
     @Headers(

@@ -16,6 +16,8 @@ import com.elrosal.app.api.ApiService
 import com.elrosal.app.api.dato
 import com.elrosal.app.databinding.ActivityMainBinding
 import com.elrosal.app.fragment.FragmentAjustes
+import com.elrosal.app.fragment.FragmentCarrito
+import com.elrosal.app.fragment.FragmentMenu
 import com.elrosal.app.fragment.InicioFragment
 import com.elrosal.app.utiles.MainFragmentActionListener
 import com.orhanobut.logger.AndroidLogAdapter
@@ -64,6 +66,7 @@ class MainActivity : AppCompatActivity(), MainFragmentActionListener {
         }
         //--------------------Acciones de los botones de la barra de menu izquierdo------
         binding.btnAjustes.setOnClickListener {
+            binding.textoTitulosBarra.setText("Ajustes")
             pasarFragment(FragmentAjustes())             //---------------Fragmento ajustes--------
             ocultar_barraMenuIzquirda()
         }
@@ -73,10 +76,18 @@ class MainActivity : AppCompatActivity(), MainFragmentActionListener {
         binding.btnBebida.setOnClickListener {
             ocultar_barraMenuIzquirda()
         }
+        binding.btnCompraCarro.setOnClickListener {
+            binding.textoTitulosBarra.setText("Lista de compra")
+            pasarFragment(FragmentCarrito())
+            ocultar_barraMenuIzquirda()
+        }
         binding.btnMenucomida.setOnClickListener {
+            binding.textoTitulosBarra.setText("Menú ofertado")
+            pasarFragment(FragmentMenu())
             ocultar_barraMenuIzquirda()
         }
         binding.imgIncio.setOnClickListener {
+            binding.textoTitulosBarra.setText("El Rosal")
             pasarFragment(InicioFragment())             //---------------Fragmento inicio--------
             ocultar_barraMenuIzquirda()
         }

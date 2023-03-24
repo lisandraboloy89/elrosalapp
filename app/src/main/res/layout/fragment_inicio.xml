@@ -19,11 +19,23 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
+            <FrameLayout
                 android:id="@+id/imagen_principal"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@drawable/photo_25" />
+                android:background="@drawable/photo_25" >
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Calidad y elegancia"
+                    android:alpha="0.5"
+                    android:background="@color/oscuro"
+                    android:textColor="@color/white"
+                    android:textSize="25dp"
+                    android:gravity="center"/>
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -32,13 +44,37 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Servicios"
+                        android:textColor="@color/oscuro" />
+
+                    <TextView
+                        android:id="@+id/text_servicio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Bar-Restaurante"
+                        android:textColor="@color/rosa"
+                        android:textSize="20dp" />
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/textView5"
                     android:layout_width="match_parent"
-                    android:gravity="center"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/oscuro"
-                    android:text="Horario de servicio" />
+                    android:gravity="center"
+                    android:text="Horario de servicio"
+                    android:textColor="@color/oscuro" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -51,36 +87,109 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:text="8:00 AM"
                         android:textColor="@color/rosa"
-                        android:textSize="20dp"
-                        android:text="8:00 AM" />
+                        android:textSize="20dp" />
+
                     <TextView
                         android:id="@+id/textssView6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_marginHorizontal="10dp"
-                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:text="a"
                         android:textColor="@color/rosa"
-                        android:text="a" />
+                        android:textSize="20dp" />
 
                     <TextView
                         android:id="@+id/text_horaCierre"
                         android:layout_width="wrap_content"
-                        android:gravity="center"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="15:00 PM"
                         android:textColor="@color/rosa"
-                        android:textSize="20dp"
-                        android:text="15:00 PM" />
+                        android:textSize="20dp" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textViesw8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Ubicación"
+                        android:textColor="@color/oscuro" />
+
+                    <TextView
+                        android:id="@+id/text_ubicacion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Songo La maya Santiago de Cuba"
+                        android:textColor="@color/rosa"
+                        android:textSize="20dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textViddesw8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Contactos"
+                        android:textColor="@color/oscuro" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/text_celular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="+22666666"
+                            android:textColor="@color/rosa"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/textddssView6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:gravity="center"
+                            android:text="-"
+                            android:textColor="@color/rosa"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/text_fijo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="+5352525252"
+                            android:textColor="@color/rosa"
+                            android:textSize="20dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycleMenu"
-                android:layout_width="match_parent"
-                android:layout_height="235dp"
-                android:orientation="horizontal"
-                tools:listitem="@layout/modelo_menu" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
