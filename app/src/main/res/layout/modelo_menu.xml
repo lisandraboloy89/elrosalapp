@@ -37,10 +37,15 @@
         android:layout_weight="1"
         android:text="$0000" />
 
-    <Button
+    <TextView
         android:id="@+id/btn_listaaa"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
         android:layout_weight="1"
+        android:layout_marginTop="10dp"
+        android:background="@color/naranja"
+        android:gravity="center"
+        android:textSize="18dp"
+        android:textColor="@color/white"
         android:text="Añadir" />
 </LinearLayout>

@@ -49,6 +49,15 @@ interface ApiService {
     )
     @GET("classes/datos")
     suspend fun getObtenerDatosG (): Response<datosGenerales>
+    //----->>>>>>GET-------Obtener datos Generales----------------------<<<<<<<<
+    @Headers(
+        "accept: application/json",
+        "X-Parse-Application-Id: 3cy8TUZoPrw4kICbVtghE0ISMsoPLceJ5RM8RXZo",
+        "X-Parse-REST-API-Key: sMP0zd8mFhKeRtNyMxh8JFg8ey7Z48zIwlFV7DCG",
+        "X-Parse-Revocable-Session: 1"
+    )
+    @PUT("classes/datos/M9Kq0j7Fbv")
+    suspend fun putModificarDatosG (@Body Datos: envioDatosGenerales): Response<pulldatosGenerales>
     //------------Registrar Pagos metodo post--------------------
     @Headers(
         "accept: application/json",

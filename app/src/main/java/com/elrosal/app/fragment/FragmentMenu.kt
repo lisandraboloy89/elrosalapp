@@ -1,30 +1,41 @@
 package com.elrosal.app.fragment
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.InputType
+import android.util.Log
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.elrosal.app.R
 import com.elrosal.app.adapter.menuAdapter
 import com.elrosal.app.api.ApiService
 import com.elrosal.app.api.dato
 import com.elrosal.app.api.respuestaMenu
+import com.elrosal.app.cache.cacheDB
+import com.elrosal.app.cache.pedido
 import com.elrosal.app.databinding.FragmentInicioBinding
 import com.elrosal.app.databinding.FragmentMenuBinding
 import com.elrosal.app.utiles.MainFragmentActionListener
+import com.google.android.material.snackbar.Snackbar
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONException
@@ -40,6 +51,9 @@ class FragmentMenu : Fragment() {
     private lateinit var binding: FragmentMenuBinding
     private var listener: MainFragmentActionListener?=null
     private lateinit var lista_resp: dato
+    var nombre:String=""
+    var precio:String=""
+    var cantidad:Int=0
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -76,8 +90,9 @@ class FragmentMenu : Fragment() {
                     recycle_area.adapter = adapter
                     adapter!!.setOnItemClickListener(object: menuAdapter.onItemClickListener{
                         override fun onItemClick(position: Int) {
-                            //var nombre=lista_resp[position].nombre.toString()
-                            //var rc=lista_resp[position].valor_rc.toString()
+                            nombre=lista_resp.results[position].nombre.toString()
+                            precio=lista_resp.results[position].precio.toString()
+                            pedirCantidadAletDialogo()
                         }
                     })
                 }catch (Ex:Exception){
@@ -164,6 +179,7 @@ class FragmentMenu : Fragment() {
         var userID: String = listaMenu!!.results[0].objectId
         Logger.d(userID)
         Logger.d(listaMenu?.results)
+        Log.d("SERVIDOR", listaMenu?.results.toString());
         lista_resp=listaMenu
         rellenarRecycleView(listaMenu?.results)
     }
@@ -172,5 +188,51 @@ class FragmentMenu : Fragment() {
     fun ToasDeError(code: String, error: String) {
         Logger.addLogAdapter(AndroidLogAdapter())
         Logger.d("$code $error")
+    }
+    fun pedirCantidadAletDialogo() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("¿Que cantidad desea?")
+
+        val input = EditText(requireContext())
+        input.inputType = InputType.TYPE_CLASS_NUMBER
+        val params = LinearLayout.LayoutParams(100, ViewGroup.LayoutParams.WRAP_CONTENT)
+        params.gravity = Gravity.CENTER
+        input.layoutParams = params
+        input.setText("1")
+        builder.setView(input)
+        builder.setCancelable(false)
+        builder.setPositiveButton("Aceptar") { dialog, which ->
+            cantidad = input.text.toString().toInt()
+            //if (cantidad != 0) {
+                realiarPedidoBD()
+           // }
+        }
+
+        builder.setNegativeButton("Cancelar") { dialog, which ->
+            dialog.dismiss()
+        }
+
+        builder.show()
+    }
+
+    private fun realiarPedidoBD() {
+
+        var dataBase: cacheDB = Room
+            .databaseBuilder(requireContext(), cacheDB::class.java, cacheDB.DATABASE_NAME)
+            .build()
+        CoroutineScope(Dispatchers.IO).launch {
+           dataBase.pedidoDao().insertPedido(pedido(producto=nombre, cantidad=cantidad.toString(), precio=precio))
+            withContext(Dispatchers.Main) {
+                val snackbar = view?.let { Snackbar.make(it, "Pedido agregado", Snackbar.LENGTH_LONG) }
+                if (snackbar != null) {
+                    snackbar.setAction("Mostrar pedidos") {
+                        listener?.pasarFragment(FragmentCarrito())
+                    }
+                }
+                if (snackbar != null) {
+                    snackbar.show()
+                }
+            }
+        }
     }
 }

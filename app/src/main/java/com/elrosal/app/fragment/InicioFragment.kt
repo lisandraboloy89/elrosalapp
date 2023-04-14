@@ -14,11 +14,14 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.elrosal.app.R
 import com.elrosal.app.adapter.menuAdapter
 import com.elrosal.app.api.ApiService
 import com.elrosal.app.api.dato
 import com.elrosal.app.api.respuestaMenu
+import com.elrosal.app.cache.cacheDB
+import com.elrosal.app.cache.general
 import com.elrosal.app.databinding.FragmentInicioBinding
 import com.elrosal.app.utiles.MainFragmentActionListener
 import com.orhanobut.logger.AndroidLogAdapter
@@ -60,6 +63,7 @@ class InicioFragment : Fragment() {
 
         //---------------------------acciones--------------------------
         //animacionFoto()
+        obtenerDatosCahe()
     }
 
     private fun animacionFoto() {
@@ -84,6 +88,28 @@ class InicioFragment : Fragment() {
         listener=null
     }
 //-----------------------------------------------------------------------------------------------------
+//-----------------------------------------------Cache de Datos-----------------------------------
+private fun obtenerDatosCahe() {
 
+    var dataBase: cacheDB = Room
+        .databaseBuilder(requireContext(), cacheDB::class.java, cacheDB.DATABASE_NAME)
+        .build()
+    CoroutineScope(Dispatchers.IO).launch {
+        var listaDatosGenerales = dataBase.generalDao().getListaInfoAll()
+        Looper.prepare()
+        cargarDatos(listaDatosGenerales!!)
+        Looper.loop()
+    }
+}
+
+    private fun cargarDatos(listaDatosGenerales: List<general>) {
+        binding.textCelular.setText(listaDatosGenerales[0].telf_celular)
+        binding.textFijo.setText(listaDatosGenerales[0].telf_fijo)
+        binding.textHoraInicio.setText(listaDatosGenerales[0].horarioInicio)
+        binding.textHoraCierre.setText(listaDatosGenerales[0].horarioCierre)
+        binding.textServicio.setText(listaDatosGenerales[0].servicios)
+        binding.textUbicacion.setText(listaDatosGenerales[0].direccion)
+        binding.textoIinfo.setText(listaDatosGenerales[0].info)
+    }
 
 }

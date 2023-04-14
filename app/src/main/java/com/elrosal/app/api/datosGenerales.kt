@@ -49,3 +49,8 @@ data class envioDatosGenerales(
     @SerializedName("fijo")
     val fijo: String
 )
+
+data class pulldatosGenerales(
+    @SerializedName("updatedAt")
+    val results: String
+)

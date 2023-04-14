@@ -1,5 +1,6 @@
 package com.elrosal.app.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.util.Base64
@@ -43,6 +44,7 @@ class menuAdapter(val respuesta:List<respuestaMenu>): RecyclerView.Adapter<menuA
         }
     }
     //----------------------------------Acciones del recycleview---------------------------
+    @SuppressLint("SuspiciousIndentation")
     override fun onBindViewHolder(holder: menuAdapter.ViewHolder, position: Int) {
 
         val resp: respuestaMenu = respuesta[position]

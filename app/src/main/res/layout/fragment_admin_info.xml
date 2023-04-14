@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".administracion.AdminInfoFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/white"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:background="@color/naranja"
+                        android:gravity="center"
+                        android:text="Panel Informaciones Generales"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+
+                    <LinearLayout
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:background="@drawable/fondo_items"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/textView4c"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Servicio"
+                            android:textColor="@color/oscuro"
+                            android:textSize="20dp" />
+
+                        <EditText
+                            android:id="@+id/text_servicio_ad"
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:hint="Texto"
+                            android:maxEms="80"
+                            android:maxLength="80"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textColor="@color/naranja"
+                            android:textColorHint="@color/gris_claro" />
+
+                        <TextView
+                            android:id="@+id/textViejw4c"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Información"
+                            android:textColor="@color/oscuro"
+                            android:textSize="20dp" />
+
+                        <EditText
+                            android:id="@+id/text_info_ad"
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:hint="Texto"
+                            android:maxEms="80"
+                            android:maxLength="80"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textColor="@color/naranja"
+                            android:textColorHint="@color/gris_claro" />
+
+                        <TextView
+                            android:id="@+id/textViaaew4c"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Hora de Incio"
+                            android:textColor="@color/oscuro"
+                            android:textSize="20dp" />
+
+                        <EditText
+                            android:id="@+id/text_horaInicio_ad"
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:hint="##:## PM"
+                            android:maxEms="80"
+                            android:maxLength="80"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textColor="@color/naranja"
+                            android:textColorHint="@color/gris_claro" />
+                        <TextView
+                            android:id="@+id/textVivvaaew4c"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Hora de Cierre"
+                            android:textColor="@color/oscuro"
+                            android:textSize="20dp" />
+
+                        <EditText
+                            android:id="@+id/text_horaCierre_ad"
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:hint="##:## PM"
+                            android:maxEms="80"
+                            android:maxLength="80"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textColor="@color/naranja"
+                            android:textColorHint="@color/gris_claro" />
+
+                        <TextView
+                            android:id="@+id/textsssc"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Dirección"
+                            android:textColor="@color/oscuro"
+                            android:textSize="20dp" />
+
+                        <EditText
+                            android:id="@+id/text_deireccion_ad"
+                            android:layout_width="250dp"
+                            android:layout_height="100dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:hint="Ubicación"
+                            android:textColor="@color/naranja"
+                            android:textColorHint="@color/gris_claro" />
+                        <TextView
+                            android:id="@+id/textggvaaew4c"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Teléfono fijo"
+                            android:textColor="@color/oscuro"
+                            android:textSize="20dp" />
+
+                        <EditText
+                            android:id="@+id/text_fijo_ad"
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:hint="22######"
+                            android:maxEms="80"
+                            android:maxLength="80"
+                            android:maxLines="1"
+                            android:inputType="phone"
+                            android:singleLine="true"
+                            android:textColor="@color/naranja"
+                            android:textColorHint="@color/gris_claro" />
+
+                        <TextView
+                            android:id="@+id/textggvfaaew4c"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Celular"
+                            android:textColor="@color/oscuro"
+                            android:textSize="20dp" />
+
+                        <EditText
+                            android:id="@+id/text_cel_ad"
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:hint="5#######"
+                            android:maxEms="80"
+                            android:maxLength="80"
+                            android:maxLines="1"
+                            android:inputType="phone"
+                            android:singleLine="true"
+                            android:textColor="@color/naranja"
+                            android:textColorHint="@color/gris_claro" />
+
+                        <TextView
+                            android:id="@+id/texctggvfaaew4c"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Tarjeta Magnética"
+                            android:textColor="@color/oscuro"
+                            android:textSize="20dp" />
+
+                        <EditText
+                            android:id="@+id/text_cuenta_ad"
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:hint="#### #### #### ####"
+                            android:maxEms="80"
+                            android:maxLength="80"
+                            android:maxLines="1"
+                            android:inputType="phone"
+                            android:singleLine="true"
+                            android:textColor="@color/naranja"
+                            android:textColorHint="@color/gris_claro" />
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_guardarInfo"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/fondo_boton"
+                        android:backgroundTint="@color/rosa"
+                        android:padding="10dp"
+                        android:text="Guardar"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

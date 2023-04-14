@@ -7,15 +7,22 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
+import androidx.room.Room
 import com.elrosal.app.api.ApiService
+import com.elrosal.app.api.dataGenerales
 import com.elrosal.app.api.dato
 import com.elrosal.app.api.datosGenerales
+import com.elrosal.app.cache.cacheDB
+import com.elrosal.app.cache.general
+import com.elrosal.app.cache.generalDao
 import com.elrosal.app.databinding.ActivitySplashScreenBinding
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONException
@@ -39,14 +46,14 @@ class Splash_screen : AppCompatActivity() {
         binding.animationSplash.playAnimation()
         carga_datosIniciales()
         //------------------------------------------------------------
-        Handler().postDelayed({
+       /* Handler().postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
             finish()
-        }, tiempo)
+        }, tiempo)*/
     }
 
     fun carga_datosIniciales() {
-        //comprobar_conexion()
+        comprobar_conexion()
     }
     //----------------------------Conexion con API--------------------------------------------
     fun comprobar_conexion(){
@@ -118,6 +125,8 @@ class Splash_screen : AppCompatActivity() {
         var userID: String = listaDatos!!.results[0].objectId
         Logger.d(userID)
         Logger.d(listaDatos?.results)
+        Log.d("SERVIDOR", listaDatos?.results.toString())
+        guardarTodaListaInfoGeneral(listaDatos.results)
     }
 
     //----------Mostrar errores en las respuestas de API------------------------
@@ -125,5 +134,36 @@ class Splash_screen : AppCompatActivity() {
         Logger.addLogAdapter(AndroidLogAdapter())
         Logger.d("$code $error")
     }
+    //--------------------Guardar todos los datos del server----------------------------
+    fun guardarTodaListaInfoGeneral(listaDatosGenerales:List<dataGenerales>?){
+        var dataBase: cacheDB  = Room
+            .databaseBuilder(this, cacheDB::class.java, cacheDB.DATABASE_NAME)
+            .build()
+        CoroutineScope(Dispatchers.IO).launch {
+            dataBase.generalDao().allTableDeleteInfoGeneral()
+            for (i in listaDatosGenerales!!.indices) {
+                val datos = general(
+                    listaDatosGenerales!![i].objectId,
+                    listaDatosGenerales!![i].info,
+                    listaDatosGenerales!![i].hora_inicio,
+                    listaDatosGenerales!![i].hora_cierre,
+                    listaDatosGenerales!![i].fijo,
+                    listaDatosGenerales!![i].telefono,
+                    listaDatosGenerales!![i].direccion,
+                    listaDatosGenerales!![i].servicios,
+                    listaDatosGenerales!![i].numero_pago
+                )
+                dataBase.generalDao().insertInfoGeneral(datos)
+            }
+            withContext(Dispatchers.Main) {
+                accionInicio()
+            }
 
+        }
+
+    }
+    fun accionInicio(){
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
+    }
 }
