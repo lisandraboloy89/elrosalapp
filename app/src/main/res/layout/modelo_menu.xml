@@ -24,9 +24,16 @@
         android:id="@+id/text_nombre_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:textColor="@color/naranja"
         android:text="Nombre del Plato" />
+
+    <TextView
+        android:id="@+id/text_gramaje_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="2dp"
+        android:textColor="@color/gris_claro"
+        android:text="000gr" />
 
     <TextView
         android:id="@+id/text_precio_menu"
@@ -34,14 +41,12 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="@color/oscuro"
-        android:layout_weight="1"
         android:text="$0000" />
 
     <TextView
         android:id="@+id/btn_listaaa"
         android:layout_width="120dp"
         android:layout_height="30dp"
-        android:layout_weight="1"
         android:layout_marginTop="10dp"
         android:background="@color/naranja"
         android:gravity="center"

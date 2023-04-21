@@ -6,32 +6,113 @@
     android:layout_height="match_parent"
     tools:context=".fragment.FragmentMenu">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:paddingVertical="10dp"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView6"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/oscuro"
-            android:layout_marginBottom="10dp"
-            android:text="Embutidos"
-            android:textSize="25dp" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingVertical="10dp">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycleMenu1"
-            android:layout_width="match_parent"
-            android:layout_height="235dp"
-            android:orientation="horizontal"
-            tools:listitem="@layout/modelo_menu" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:text="Asados"
+                    android:textColor="@color/oscuro"
+                    android:textSize="25dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycleMenu1"
+                    android:layout_width="match_parent"
+                    android:layout_height="235dp"
+                    android:orientation="horizontal"
+                    tools:listitem="@layout/modelo_menu" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViesw6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:text="Guarniciones"
+                    android:textColor="@color/oscuro"
+                    android:textSize="25dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycleMenuGua"
+                    android:layout_width="match_parent"
+                    android:layout_height="235dp"
+                    android:orientation="horizontal"
+                    tools:listitem="@layout/modelo_menu" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView6E"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:text="Ensaladas"
+                    android:textColor="@color/oscuro"
+                    android:textSize="25dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycleMenuEnsalada"
+                    android:layout_width="match_parent"
+                    android:layout_height="235dp"
+                    android:orientation="horizontal"
+                    tools:listitem="@layout/modelo_menu" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViewas6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:text="Bebidas"
+                    android:textColor="@color/oscuro"
+                    android:textSize="25dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycleMenuBebidas"
+                    android:layout_width="match_parent"
+                    android:layout_height="235dp"
+                    android:orientation="horizontal"
+                    tools:listitem="@layout/modelo_menu" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

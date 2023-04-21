@@ -29,6 +29,7 @@ import com.orhanobut.logger.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONException
@@ -90,15 +91,14 @@ class InicioFragment : Fragment() {
 //-----------------------------------------------------------------------------------------------------
 //-----------------------------------------------Cache de Datos-----------------------------------
 private fun obtenerDatosCahe() {
-
     var dataBase: cacheDB = Room
         .databaseBuilder(requireContext(), cacheDB::class.java, cacheDB.DATABASE_NAME)
         .build()
     CoroutineScope(Dispatchers.IO).launch {
         var listaDatosGenerales = dataBase.generalDao().getListaInfoAll()
-        Looper.prepare()
-        cargarDatos(listaDatosGenerales!!)
-        Looper.loop()
+        withContext(Dispatchers.Main) {
+            cargarDatos(listaDatosGenerales!!)
+        }
     }
 }
 

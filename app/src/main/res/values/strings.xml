@@ -2,4 +2,10 @@
     <string name="app_name">El Rosal</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="options_array">
+        <item>asados</item>
+        <item>guarnición</item>
+        <item>ensalada</item>
+        <item>bebida</item>
+    </string-array>
 </resources>

@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -61,6 +63,7 @@ class AdminMenuFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         //---------------------------acciones--------------------------
+
         //----------------------------------Agregar el signo de gramo despues de escribir el gramaje---------
         binding.btnAgregarMenu.setOnClickListener {
             AgregarMenuNuevoBD()
@@ -86,8 +89,8 @@ class AdminMenuFragment : Fragment() {
                 }
             }
         }
-    }
 
+    }
     override fun onDetach() {
         super.onDetach()
         listener=null
@@ -130,7 +133,7 @@ class AdminMenuFragment : Fragment() {
                             binding.textGramajeAd.text.toString(),
                             binding.textDescripAd.text.toString(),
                             fotoString,
-                            "ensalada",
+                            binding.optionsSpinner.selectedItem.toString(),
                             true
                         )
 

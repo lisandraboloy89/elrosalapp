@@ -84,14 +84,15 @@ class FragmentMenu : Fragment() {
                 try {
                     //binding.textoError.visibility=View.GONE
                     val recycle_area: RecyclerView = binding.recycleMenu1
-                    var adapter = menuAdapter(results)
+                    var listaFiltrada=results.filter { it.tipo=="asados"}
+                    var adapter = menuAdapter(listaFiltrada)
                     recycle_area.layoutManager = LinearLayoutManager(requireContext(),
                         LinearLayoutManager.HORIZONTAL, false)
                     recycle_area.adapter = adapter
                     adapter!!.setOnItemClickListener(object: menuAdapter.onItemClickListener{
                         override fun onItemClick(position: Int) {
-                            nombre=lista_resp.results[position].nombre.toString()
-                            precio=lista_resp.results[position].precio.toString()
+                            nombre=listaFiltrada[position].nombre.toString()
+                            precio=listaFiltrada[position].precio.toString()
                             pedirCantidadAletDialogo()
                         }
                     })
@@ -99,10 +100,8 @@ class FragmentMenu : Fragment() {
                     // binding.textoError.visibility=View.VISIBLE
                 }
 
-            }, 1000)
+            }, 10)
         })
-        Logger.addLogAdapter(AndroidLogAdapter())
-        Logger.d(lista_resp);
     }
 
     override fun onDetach() {
@@ -182,6 +181,9 @@ class FragmentMenu : Fragment() {
         Log.d("SERVIDOR", listaMenu?.results.toString());
         lista_resp=listaMenu
         rellenarRecycleView(listaMenu?.results)
+        rellenarRecycleViewBebidas(listaMenu?.results)
+        rellenarRecycleViewGuarniciones(listaMenu?.results)
+        rellenarRecycleViewEnsalada(listaMenu?.results)
     }
 
     //----------Mostrar errores en las respuestas de API------------------------
@@ -234,5 +236,87 @@ class FragmentMenu : Fragment() {
                 }
             }
         }
+    }
+    //---------------------------------------------------------------------
+    private fun rellenarRecycleViewBebidas(results: List<respuestaMenu>) {
+        activity?.runOnUiThread(java.lang.Runnable {
+            Handler().postDelayed({
+                //binding.animationEspera.visibility=View.GONE
+                try {
+                    //binding.textoError.visibility=View.GONE
+                    val recycle_area: RecyclerView = binding.recycleMenuBebidas
+                   var listaFiltrada1=results.filter { it.tipo=="bebida"}
+                    var adapter = menuAdapter(listaFiltrada1)
+                    recycle_area.layoutManager = LinearLayoutManager(requireContext(),
+                        LinearLayoutManager.HORIZONTAL, false)
+                    recycle_area.adapter = adapter
+                    adapter!!.setOnItemClickListener(object: menuAdapter.onItemClickListener{
+                        override fun onItemClick(position: Int) {
+                            nombre=listaFiltrada1[position].nombre.toString()
+                            precio=listaFiltrada1[position].precio.toString()
+                            pedirCantidadAletDialogo()
+                        }
+                    })
+                }catch (Ex:Exception){
+                    // binding.textoError.visibility=View.VISIBLE
+                }
+
+            }, 10)
+        })
+
+    }
+    private fun rellenarRecycleViewGuarniciones(results: List<respuestaMenu>) {
+        activity?.runOnUiThread(java.lang.Runnable {
+            Handler().postDelayed({
+                //binding.animationEspera.visibility=View.GONE
+                try {
+                    //binding.textoError.visibility=View.GONE
+                    val recycle_area: RecyclerView = binding.recycleMenuGua
+                    var listaFiltrada=results.filter { it.tipo=="guarnición"}
+                    var adapter = menuAdapter(listaFiltrada)
+                    recycle_area.layoutManager = LinearLayoutManager(requireContext(),
+                        LinearLayoutManager.HORIZONTAL, false)
+                    recycle_area.adapter = adapter
+                    adapter!!.setOnItemClickListener(object: menuAdapter.onItemClickListener{
+                        override fun onItemClick(position: Int) {
+                            nombre=listaFiltrada[position].nombre.toString()
+                            precio=listaFiltrada[position].precio.toString()
+                            pedirCantidadAletDialogo()
+                        }
+                    })
+                }catch (Ex:Exception){
+                    // binding.textoError.visibility=View.VISIBLE
+                }
+
+            }, 10)
+        })
+
+    }
+    private fun rellenarRecycleViewEnsalada(results: List<respuestaMenu>) {
+        activity?.runOnUiThread(java.lang.Runnable {
+            Handler().postDelayed({
+                //binding.animationEspera.visibility=View.GONE
+                try {
+                    //binding.textoError.visibility=View.GONE
+                    val recycle_area: RecyclerView = binding.recycleMenuEnsalada
+                    var listaFiltrada=results.filter { it.tipo=="ensalada"}
+                    var adapter = menuAdapter(listaFiltrada)
+                    recycle_area.layoutManager = LinearLayoutManager(requireContext(),
+                        LinearLayoutManager.HORIZONTAL, false)
+                    recycle_area.adapter = adapter
+                    adapter!!.setOnItemClickListener(object: menuAdapter.onItemClickListener{
+                        override fun onItemClick(position: Int) {
+                            nombre=listaFiltrada[position].nombre.toString()
+                            precio=listaFiltrada[position].precio.toString()
+                            pedirCantidadAletDialogo()
+                        }
+                    })
+                }catch (Ex:Exception){
+                    // binding.textoError.visibility=View.VISIBLE
+                }
+
+            }, 10)
+        })
+
     }
 }

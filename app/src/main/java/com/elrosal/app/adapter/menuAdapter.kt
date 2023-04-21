@@ -35,6 +35,7 @@ class menuAdapter(val respuesta:List<respuestaMenu>): RecyclerView.Adapter<menuA
     class ViewHolder(ItemView: View, listener: menuAdapter.onItemClickListener) : RecyclerView.ViewHolder(ItemView) {
         val nombreMenu: TextView = itemView.findViewById(R.id.text_nombre_menu)
         val precioMenu: TextView = itemView.findViewById(R.id.text_precio_menu)
+        val gramajeMenu: TextView = itemView.findViewById(R.id.text_gramaje_menu)
         val imagenMenu: ImageView = itemView.findViewById(R.id.img_menu)
         init {
             itemView.setOnClickListener {
@@ -48,9 +49,15 @@ class menuAdapter(val respuesta:List<respuestaMenu>): RecyclerView.Adapter<menuA
     override fun onBindViewHolder(holder: menuAdapter.ViewHolder, position: Int) {
 
         val resp: respuestaMenu = respuesta[position]
+        var tipo_plato=resp.tipo
+
+        //if(tipo_plato.equals("asados")) {
         holder.nombreMenu.setText(resp.nombre.toString())
         holder.precioMenu.setText(resp.precio)
-        var bitmapString=resp.muestraFoto
+        holder.gramajeMenu.setText(resp.grmaje)
+
+
+            var bitmapString = resp.muestraFoto
             if (bitmapString.equals("0")) {
             } else {
                 val decodedByteArray = Base64.decode(bitmapString, Base64.DEFAULT)
@@ -59,6 +66,6 @@ class menuAdapter(val respuesta:List<respuestaMenu>): RecyclerView.Adapter<menuA
                 holder.imagenMenu.setImageBitmap(decodedBitmap)
 
             }
-
+       // }
     }
 }

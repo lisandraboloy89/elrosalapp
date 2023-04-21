@@ -21,6 +21,8 @@ data class respuestaMenu(
     var muestraFoto: String,
     @SerializedName("tipo")
     var tipo: String,
+    @SerializedName("gramaje")
+    var grmaje: String,
     @SerializedName("estado")
     var estado: Boolean
 )
