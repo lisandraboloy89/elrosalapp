@@ -1,9 +1,11 @@
 package com.elrosal.app.administracion
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Looper
 import android.util.Base64
@@ -66,7 +68,7 @@ class AdminMenuFragment : Fragment() {
 
         //----------------------------------Agregar el signo de gramo despues de escribir el gramaje---------
         binding.btnAgregarMenu.setOnClickListener {
-            AgregarMenuNuevoBD()
+            comprobar_conexion()
         }
         binding.imgMenuAd.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)     //-------obtener imagen de la galeria
@@ -111,6 +113,18 @@ class AdminMenuFragment : Fragment() {
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
+    }
+    fun comprobar_conexion(){
+        val connectivityManager =
+            context?.getSystemService(Activity.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+
+        //--------verifica la conexion de internet para continuar-----------------------------
+        if (networkInfo != null && networkInfo.isConnected) {
+            AgregarMenuNuevoBD()
+        } else {
+            Toast.makeText(requireContext(),"No hay conexión a Internet", Toast.LENGTH_SHORT).show()
+        }
     }
     private fun AgregarMenuNuevoBD() {
         //-------convertir la imagen en un Strning------------------------

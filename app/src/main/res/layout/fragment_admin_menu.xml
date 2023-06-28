@@ -55,6 +55,14 @@
                         android:orientation="vertical"
                         android:padding="10dp">
 
+                        <TextView
+                            android:id="@+id/text_tipo_sad"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Seleccione la foto del plato"
+                            android:textColor="@color/naranja" />
 
                         <ImageView
                             android:id="@+id/img_menu_ad"
@@ -63,7 +71,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:background="@drawable/imgen_bordes_redondos"
-                            android:src="@drawable/pizza1" />
+                            android:src="@drawable/baseline_photo_camera_24" />
 
                         <EditText
                             android:id="@+id/text_nombre_ad"
@@ -85,7 +93,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:hint="Precio en CUP"
+                            android:hint="Precio en MN"
                             android:inputType="numberDecimal"
                             android:maxLines="1"
                             android:textColor="@color/oscuro"
@@ -106,10 +114,10 @@
                         <EditText
                             android:id="@+id/text_descrip_ad"
                             android:layout_width="250dp"
-                            android:layout_height="200dp"
+                            android:layout_height="100dp"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:hint="Descripcion"
+                            android:hint="Descripción"
                             android:textColor="@color/oscuro"
                             android:textColorHint="@color/gris_claro" />
 
@@ -119,7 +127,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="Tipo de plato"
+                            android:text="Seleccione el tipo de plato"
                             android:textColor="@color/naranja" />
                         <Spinner
                             android:id="@+id/options_spinner"

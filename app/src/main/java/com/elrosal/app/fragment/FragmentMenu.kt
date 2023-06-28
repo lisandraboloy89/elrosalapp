@@ -7,6 +7,7 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.preference.PreferenceManager
 import android.text.InputType
 import android.util.Log
 import android.view.Gravity
@@ -19,14 +20,13 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import com.elrosal.app.R
 import com.elrosal.app.adapter.menuAdapter
 import com.elrosal.app.api.ApiService
 import com.elrosal.app.api.dato
 import com.elrosal.app.api.respuestaMenu
 import com.elrosal.app.cache.cacheDB
+import com.elrosal.app.cache.menu
 import com.elrosal.app.cache.pedido
-import com.elrosal.app.databinding.FragmentInicioBinding
 import com.elrosal.app.databinding.FragmentMenuBinding
 import com.elrosal.app.utiles.MainFragmentActionListener
 import com.google.android.material.snackbar.Snackbar
@@ -43,6 +43,8 @@ import org.json.JSONObject
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 
@@ -54,6 +56,12 @@ class FragmentMenu : Fragment() {
     var nombre:String=""
     var precio:String=""
     var cantidad:Int=0
+
+    var c: Calendar = Calendar.getInstance()
+    var sdf: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+    var hora: SimpleDateFormat = SimpleDateFormat("HH:mm:ss")
+    var capturarFecha: String = sdf.format(c.getTime())
+    var capturarHora: String = hora.format(c.getTime())
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -77,7 +85,7 @@ class FragmentMenu : Fragment() {
         //animacionFoto()
     }
     //-------------------------Metodo para rellenar el recycleview con los datos del menu---------------
-    private fun rellenarRecycleView(results: List<respuestaMenu>) {
+    private fun rellenarRecycleView(results: List<menu>) {
         activity?.runOnUiThread(java.lang.Runnable {
             Handler().postDelayed({
                 //binding.animationEspera.visibility=View.GONE
@@ -95,9 +103,10 @@ class FragmentMenu : Fragment() {
                             precio=listaFiltrada[position].precio.toString()
                             pedirCantidadAletDialogo()
                         }
+
+
                     })
                 }catch (Ex:Exception){
-                    // binding.textoError.visibility=View.VISIBLE
                 }
 
             }, 10)
@@ -119,8 +128,7 @@ class FragmentMenu : Fragment() {
         if (networkInfo != null && networkInfo.isConnected) {
             obtenerListaMenu()
         } else {
-            //toastExt("Active el Internet para seguir")
-            //mensajeDialog.startMenssageDialogo("Active el Internet para seguir")
+            usarBDInternaMenu()
         }
     }
     ////------------------API-RESET-Retrofit------------------------------------------/////
@@ -148,9 +156,9 @@ class FragmentMenu : Fragment() {
                     .getObtenerMenu()
                 val listaMenu: dato? = call.body()
                 if (call.isSuccessful) {
-                    Looper.prepare()
-                    listarMenu(listaMenu!!)  //-------------Pasar Respuesta obtenido a metodo
-                    Looper.loop()
+                    withContext(Dispatchers.Main) {
+                        listarMenu(listaMenu!!)  //-------------Pasar Respuesta obtenido a metodo
+                    }
                 } else { //--------------------Respuesta Error------------------------------
                     if (call.code() == 400 || call.code() == 404 ) {
                         var jsonObject: JSONObject? = null
@@ -158,9 +166,9 @@ class FragmentMenu : Fragment() {
                             jsonObject = JSONObject(call.errorBody()?.string())
                             val Codigo = jsonObject!!.getString("code")
                             val Errors = jsonObject!!.getString("error")
-                            Looper.prepare()
-                            ToasDeError(Codigo,Errors)
-                            Looper.loop()
+                            withContext(Dispatchers.Main) {
+                                ToasDeError(Codigo, Errors)
+                            }
                         } catch (e: JSONException) {
                             e.printStackTrace()
                         }
@@ -180,10 +188,13 @@ class FragmentMenu : Fragment() {
         Logger.d(listaMenu?.results)
         Log.d("SERVIDOR", listaMenu?.results.toString());
         lista_resp=listaMenu
-        rellenarRecycleView(listaMenu?.results)
-        rellenarRecycleViewBebidas(listaMenu?.results)
-        rellenarRecycleViewGuarniciones(listaMenu?.results)
-        rellenarRecycleViewEnsalada(listaMenu?.results)
+        guardarTodaListaMenu(listaMenu.results)
+
+        binding.textoFechaDatos.setText("$capturarFecha a las $capturarHora")
+        val shareprefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val editor = shareprefs.edit()
+        editor.putString("fechaUpdate_key", "$capturarFecha a las $capturarHora")
+        editor.apply()
     }
 
     //----------Mostrar errores en las respuestas de API------------------------
@@ -191,6 +202,7 @@ class FragmentMenu : Fragment() {
         Logger.addLogAdapter(AndroidLogAdapter())
         Logger.d("$code $error")
     }
+    //----------------Dialogo de pedit cantidad de producto al usaurio-----------
     fun pedirCantidadAletDialogo() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("¿Que cantidad desea?")
@@ -216,7 +228,24 @@ class FragmentMenu : Fragment() {
 
         builder.show()
     }
-
+    fun usarBDInternaMenu(){
+        var dataBase: cacheDB = Room
+            .databaseBuilder(requireContext(), cacheDB::class.java, cacheDB.DATABASE_NAME)
+            .build()
+        CoroutineScope(Dispatchers.IO).launch {
+            var listaMenuBd = dataBase.menuDao().getListaMenuAll()
+            withContext(Dispatchers.Main) {
+                rellenarRecycleViewBebidas(listaMenuBd)
+                rellenarRecycleView(listaMenuBd)
+                rellenarRecycleViewGuarniciones(listaMenuBd)
+                rellenarRecycleViewEnsalada(listaMenuBd)
+                val shareprefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                var fechaUpdate = shareprefs.getString("fechaUpdate_key", "0/0/0")!!
+                binding.textoFechaDatos.setText(fechaUpdate)
+            }
+        }
+    }
+//------------------Guardar el pedido en la base de datos interna cache-----------------------------------
     private fun realiarPedidoBD() {
 
         var dataBase: cacheDB = Room
@@ -237,8 +266,8 @@ class FragmentMenu : Fragment() {
             }
         }
     }
-    //---------------------------------------------------------------------
-    private fun rellenarRecycleViewBebidas(results: List<respuestaMenu>) {
+    //----------------------------Rellenar la lista de bebidas-----------------------------------------
+    private fun rellenarRecycleViewBebidas(results: List<menu>) {
         activity?.runOnUiThread(java.lang.Runnable {
             Handler().postDelayed({
                 //binding.animationEspera.visibility=View.GONE
@@ -265,7 +294,7 @@ class FragmentMenu : Fragment() {
         })
 
     }
-    private fun rellenarRecycleViewGuarniciones(results: List<respuestaMenu>) {
+    private fun rellenarRecycleViewGuarniciones(results: List<menu>) {
         activity?.runOnUiThread(java.lang.Runnable {
             Handler().postDelayed({
                 //binding.animationEspera.visibility=View.GONE
@@ -292,7 +321,7 @@ class FragmentMenu : Fragment() {
         })
 
     }
-    private fun rellenarRecycleViewEnsalada(results: List<respuestaMenu>) {
+    private fun rellenarRecycleViewEnsalada(results: List<menu>) {
         activity?.runOnUiThread(java.lang.Runnable {
             Handler().postDelayed({
                 //binding.animationEspera.visibility=View.GONE
@@ -318,5 +347,32 @@ class FragmentMenu : Fragment() {
             }, 10)
         })
 
+    }
+    //--------------------Guardar todos los datos del server----------------------------
+    fun guardarTodaListaMenu(listaMenu:List<respuestaMenu>?){
+        var dataBase: cacheDB  = Room
+            .databaseBuilder(requireContext(), cacheDB::class.java, cacheDB.DATABASE_NAME)
+            .build()
+        CoroutineScope(Dispatchers.IO).launch {
+            dataBase.menuDao().allTableDeleteMenu()
+            for (i in listaMenu!!.indices) {
+                val datos = menu(
+                    listaMenu!![i].objectId,
+                    listaMenu!![i].nombre,
+                    listaMenu!![i].precio,
+                    listaMenu!![i].descripcion,
+                    listaMenu!![i].grmaje,
+                    listaMenu!![i].estado,
+                    listaMenu!![i].muestraFoto,
+                    listaMenu!![i].tipo,
+                )
+                dataBase.menuDao().insertMenu(datos)
+            }
+            withContext(Dispatchers.Main) {
+               // accionInicio()
+                usarBDInternaMenu()
+            }
+
+        }
     }
 }

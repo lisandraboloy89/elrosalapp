@@ -103,8 +103,7 @@ class AdminInfoFragment : Fragment() {
         if (networkInfo != null && networkInfo.isConnected) {
             modificarDatosIniciales()
         } else {
-            //toastExt("Active el Internet para seguir")
-            //mensajeDialog.startMenssageDialogo("Active el Internet para seguir")
+            Toast.makeText(requireContext(),"No hay conexión a Internet", Toast.LENGTH_SHORT).show()
         }
     }
     //-------------------------------Hacer pedido a API en Hilo secundario------------------------------------

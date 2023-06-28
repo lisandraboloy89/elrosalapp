@@ -25,4 +25,6 @@ interface pedidoDao {
     //----------borrar toda la tabla---------------
     @Query("DELETE FROM pedido")
     suspend fun allTableDelete()
+    @Query("DELETE FROM pedido WHERE IdPedido = :id ")
+    suspend fun borrarPedido(id: Int)
 }

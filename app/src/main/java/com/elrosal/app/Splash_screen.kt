@@ -7,7 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.preference.PreferenceManager
 import android.util.Log
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.room.Room
 import com.elrosal.app.api.ApiService
 import com.elrosal.app.api.dataGenerales
@@ -64,9 +67,19 @@ class Splash_screen : AppCompatActivity() {
         //--------verifica la conexion de internet para continuar-----------------------------
         if (networkInfo != null && networkInfo.isConnected) {
             obtenerDatosIniciales()
-        } else {
-            //toastExt("Active el Internet para seguir")
-            //mensajeDialog.startMenssageDialogo("Active el Internet para seguir")
+        } else
+        //---------------si no hay internet usar base de datos cache--------------------------
+        {val shareprefs = PreferenceManager.getDefaultSharedPreferences(this)
+            var inicio_val = shareprefs.getString("datoInicio_key", "0")!!
+            if(inicio_val.equals("0")){
+                Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_LONG).show()
+            }else{
+                Handler().postDelayed({
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                },1000)
+            }
+
         }
     }
     //-------------------------------Hacer pedido a API en Hilo secundario------------------------------------
@@ -156,13 +169,18 @@ class Splash_screen : AppCompatActivity() {
                 dataBase.generalDao().insertInfoGeneral(datos)
             }
             withContext(Dispatchers.Main) {
-                accionInicio()
+                accionInicio(listaDatosGenerales[0].objectId)
+
             }
 
         }
 
     }
-    fun accionInicio(){
+    fun accionInicio(id:String){
+        val shareprefs = PreferenceManager.getDefaultSharedPreferences(this)
+        val editor = shareprefs.edit()
+        editor.putString("datoInicio_key", id)
+        editor.apply()
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }

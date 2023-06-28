@@ -15,7 +15,7 @@ data class menu(
     var precio:String,
     var descripcion:String,
     var gramaje:String,
-    var estado:String,
+    var estado:Boolean,
     var muestra:String,
     var tipo:String
 )

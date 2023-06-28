@@ -13,8 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.elrosal.app.R
 import com.elrosal.app.api.respuestaMenu
+import com.elrosal.app.cache.menu
 
-class menuAdapter(val respuesta:List<respuestaMenu>): RecyclerView.Adapter<menuAdapter.ViewHolder>() {
+class menuAdapter(val respuesta:List<menu>): RecyclerView.Adapter<menuAdapter.ViewHolder>() {
     private lateinit var mlistener:onItemClickListener
 
     interface onItemClickListener{
@@ -48,16 +49,16 @@ class menuAdapter(val respuesta:List<respuestaMenu>): RecyclerView.Adapter<menuA
     @SuppressLint("SuspiciousIndentation")
     override fun onBindViewHolder(holder: menuAdapter.ViewHolder, position: Int) {
 
-        val resp: respuestaMenu = respuesta[position]
+        val resp: menu = respuesta[position]
         var tipo_plato=resp.tipo
 
         //if(tipo_plato.equals("asados")) {
         holder.nombreMenu.setText(resp.nombre.toString())
         holder.precioMenu.setText(resp.precio)
-        holder.gramajeMenu.setText(resp.grmaje)
+        holder.gramajeMenu.setText(resp.gramaje)
 
 
-            var bitmapString = resp.muestraFoto
+            var bitmapString = resp.muestra
             if (bitmapString.equals("0")) {
             } else {
                 val decodedByteArray = Base64.decode(bitmapString, Base64.DEFAULT)

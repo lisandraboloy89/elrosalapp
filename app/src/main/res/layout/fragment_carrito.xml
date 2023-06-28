@@ -11,11 +11,53 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/modelo_pedido" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@drawable/fondo_barra_arriba"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/btn_extra2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/ic_baseline_monetization_on_24"
+            android:scaleType="center" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/naranja"
+            android:layout_marginLeft="15dp"
+            android:gravity="center"
+            android:textSize="18dp"
+            android:text="Total a pagar:" />
+
+        <TextView
+            android:id="@+id/texto_totalCuetna"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gris_claro"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:layout_weight="1"
+            android:text="0.0 MN" />
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -29,29 +71,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <ImageView
+        <View
             android:id="@+id/btn_extra"
             android:layout_width="35dp"
             android:layout_height="40dp"
-            android:background="@drawable/ic_baseline_monetization_on_24"
             android:scaleType="center" />
 
         <TextView
-            android:id="@+id/texto_pa"
+            android:id="@+id/btn_pagar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Pagar"
+            android:text="Pagar la cuenta"
             android:textColor="@color/white"
             android:textSize="25dp" />
 
-        <ImageView
-            android:id="@+id/btn_borrarPedido"
+        <View
             android:layout_width="50dp"
             android:layout_height="30dp"
-            android:layout_weight="0"
-            app:srcCompat="@drawable/round_delete_forever_24" />
+            android:layout_weight="0" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
