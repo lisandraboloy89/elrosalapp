@@ -40,7 +40,13 @@ class Pago : AppCompatActivity() {
             }
         }
         binding.btnTransfermovil.setOnClickListener {
-
+            val packageName="cu.etecsa.cubacel.tr.tm"
+            val intent=packageManager.getLaunchIntentForPackage(packageName)
+            if(intent!=null){
+                startActivity(intent)
+            }else{
+                Toast.makeText(this,"No se puede abrir TRANSFERMÓVIL",Toast.LENGTH_SHORT).show()
+            }
         }
 
         //---cu.xetid.apk.enzona
